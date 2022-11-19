@@ -15,6 +15,7 @@ bot.start((ctx) =>
 
   )
 );
+
 bot.command('hipster', Telegraf.reply('λ'));
 bot.hears("hi", (ctx) => ctx.reply("hello"));
 

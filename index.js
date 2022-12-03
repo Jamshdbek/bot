@@ -1,6 +1,7 @@
 const { Telegraf, Markup } = require("telegraf");
 require("dotenv").config();
 // config env
+// config
 const {suralar} = require("./option")
 console.log(suralar);
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -15,6 +16,7 @@ bot.start((ctx) =>
 
   )
 );
+
 bot.command('hipster', Telegraf.reply('λ'));
 bot.hears("hi", (ctx) => ctx.reply("hello"));
 

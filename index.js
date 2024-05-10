@@ -2,28 +2,38 @@ const { Telegraf, Markup } = require("telegraf");
 require("dotenv").config();
 // config env
 // config
-const {suralar} = require("./option")
+const { suralar } = require("./option");
 console.log(suralar);
 const bot = new Telegraf(process.env.BOT_TOKEN);
 //
 bot.start((ctx) =>
   ctx.reply(
-    `Assalomu Alaykum  ${
+    `Assalomu Alaykum  suralarni olish uchun /suralar  so'zin ustiga bosing! ${
       ctx.message.from.first_name
         ? ctx.message.from.first_name
         : "Assalomu Alaykum ~"
-    }`,
-
+    }`
   )
 );
-
-bot.command('hipster', Telegraf.reply('λ'));
+bot.command("showsticker", (ctx) => {
+  // Replace 'YOUR_STICKER_ID' with the ID of the sticker you want to send
+  ctx.replyWithSticker(
+    "CAACAgIAAxkBAAEKwLllVEhhDrl6WlnRDd-u8yap-TTo0gACIwADKA9qFCdRJeeMIKQGMwQ"
+  );
+  setTimeout(async () => {
+    try {
+      await ctx.deleteMessage(stickerMessage.message_id);
+    } catch (error) {
+      console.error("Error deleting message:", error);
+    }
+  }, 5000);
+});
+bot.command("hipster", Telegraf.reply("λ"));
 bot.hears("hi", (ctx) => ctx.reply("hello"));
-
-bot.hears("suralar", (ctx) => {
+bot.command("suralar", (ctx) => {
   try {
     ctx.replyWithHTML(
-      "Surlalardan brini tanlang... ",
+      "Surlalardan birini tanlang... ",
       Markup.inlineKeyboard([
         [Markup.button.callback("Fotiha", "fotha")],
         [Markup.button.callback("Imran", "imran")],
@@ -52,8 +62,6 @@ bot.hears("suralar", (ctx) => {
         [Markup.button.callback("Sh'ara", "shara")],
 
         [Markup.button.callback("➡", "next")],
-
-        
       ])
       //inline
     );
@@ -62,16 +70,16 @@ bot.hears("suralar", (ctx) => {
   }
 });
 
-
 // Enable
 bot.action("next", async (ctx) => {
   try {
-    await ctx.answerCbQuery()
+    await ctx.answerCbQuery();
     // await ctx.replyWithAudio(src, {
-      //   disable_web_page_preview: true
-      
-      // })
-    await ctx.replyWithHTML( "...",
+    //   disable_web_page_preview: true
+
+    // })
+    await ctx.replyWithHTML(
+      "...",
       Markup.inlineKeyboard([
         [Markup.button.callback("Naml", "naml")],
         [Markup.button.callback("Gasas", "gasas")],
@@ -101,27 +109,24 @@ bot.action("next", async (ctx) => {
         [Markup.button.callback("Qamar", "qamar")],
         [Markup.button.callback("Rahman", "rahman")],
         [Markup.button.callback("Waqiah", "waqiah")],
-        
+
         [Markup.button.callback("➡", "townees")],
-
-
       ])
+    );
+  } catch (err) {
+    console.log(err);
+  }
+});
 
-      )
-    } catch (err) {
-      console.log(err)
-    }
-  })
-  
-  
 bot.action("townees", async (ctx) => {
   try {
-    await ctx.answerCbQuery()
+    await ctx.answerCbQuery();
     // await ctx.replyWithAudio(src, {
-      //   disable_web_page_preview: true
-      
-      // })
-    await ctx.replyWithHTML( "...",
+    //   disable_web_page_preview: true
+
+    // })
+    await ctx.replyWithHTML(
+      "...",
       Markup.inlineKeyboard([
         [Markup.button.callback("Hadid", "hadid")],
         [Markup.button.callback("Mujadilah", "mujadilah")],
@@ -149,36 +154,32 @@ bot.action("townees", async (ctx) => {
         [Markup.button.callback("Qurash", "qurash")],
         [Markup.button.callback("Falaq", "falaq")],
         [Markup.button.callback("Nas", "nas")],
-        
       ])
-      
-    )
+    );
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-})
+});
 
-function getSura(name ,src){
-    bot.action(name , async (ctx)=>{
-        try {
-            await ctx.answerCbQuery()
-            await ctx.replyWithAudio(src, {
-                disable_web_page_preview: true
-
-            })
-        } catch (err) {
-            console.log(err)
-        }
-    })
+function getSura(name, src) {
+  bot.action(name, async (ctx) => {
+    try {
+      await ctx.answerCbQuery();
+      await ctx.replyWithAudio(src, {
+        disable_web_page_preview: true,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  });
 }
-suralar.map((value)=>{
- getSura(value.name , value.url)
-})
-
+suralar.map((value) => {
+  getSura(value.name, value.url);
+});
 
 bot.launch();
 
 // Enable graceful stop
-console.log('=Working=');
+console.log(" bot is readiy 🏎");
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));

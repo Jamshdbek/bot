@@ -20,13 +20,6 @@ bot.command("showsticker", (ctx) => {
   ctx.replyWithSticker(
     "CAACAgIAAxkBAAEKwLllVEhhDrl6WlnRDd-u8yap-TTo0gACIwADKA9qFCdRJeeMIKQGMwQ"
   );
-  setTimeout(async () => {
-    try {
-      await ctx.deleteMessage(stickerMessage.message_id);
-    } catch (error) {
-      console.error("Error deleting message:", error);
-    }
-  }, 5000);
 });
 bot.command("hipster", Telegraf.reply("λ"));
 bot.hears("hi", (ctx) => ctx.reply("hello"));

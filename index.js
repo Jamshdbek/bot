@@ -4,7 +4,9 @@ require("dotenv").config();
 // config
 const { suralar } = require("./option");
 console.log(suralar);
-const bot = new Telegraf(process.env.BOT_TOKEN);
+// const bot = new Telegraf(process.env.BOT_TOKEN);
+const bot = new Telegraf("5315982298:AAGEIH5ZJM8OSiAQDa4qvE51KueHhSFH2Dk");
+
 //
 bot.start((ctx) =>
   ctx.reply(

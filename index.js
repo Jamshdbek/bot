@@ -4,8 +4,8 @@ require("dotenv").config();
 // config
 const { suralar } = require("./option");
 console.log(suralar);
-const bot = new Telegraf(process.env.BOT_TOKEN);
-//
+const bot = new Telegraf("5315982298:AAGEIH5ZJM8OSiAQDa4qvE51KueHhSFH2Dk");
+
 bot.start((ctx) =>
   ctx.reply(
     `Assalomu Alaykum  suralarni olish uchun /suralar  so'zin ustiga bosing! ${
@@ -16,7 +16,6 @@ bot.start((ctx) =>
   )
 );
 bot.command("showsticker", (ctx) => {
-  // Replace 'YOUR_STICKER_ID' with the ID of the sticker you want to send
   ctx.replyWithSticker(
     "CAACAgIAAxkBAAEKwLllVEhhDrl6WlnRDd-u8yap-TTo0gACIwADKA9qFCdRJeeMIKQGMwQ"
   );
@@ -67,10 +66,6 @@ bot.command("suralar", (ctx) => {
 bot.action("next", async (ctx) => {
   try {
     await ctx.answerCbQuery();
-    // await ctx.replyWithAudio(src, {
-    //   disable_web_page_preview: true
-
-    // })
     await ctx.replyWithHTML(
       "...",
       Markup.inlineKeyboard([
@@ -114,10 +109,6 @@ bot.action("next", async (ctx) => {
 bot.action("townees", async (ctx) => {
   try {
     await ctx.answerCbQuery();
-    // await ctx.replyWithAudio(src, {
-    //   disable_web_page_preview: true
-
-    // })
     await ctx.replyWithHTML(
       "...",
       Markup.inlineKeyboard([
@@ -176,3 +167,5 @@ bot.launch();
 console.log(" bot is readiy 🏎");
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
+
+
